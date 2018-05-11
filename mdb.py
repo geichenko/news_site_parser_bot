@@ -1,10 +1,11 @@
 from pymongo import MongoClient
 from dateutil import parser
+from bot_config import mongodb_host
 
 
 class MDB(object):
     def __init__(self, u_name: str, u_pass: str, db_name: str, collection: str):
-        mongo_url = f"mongodb+srv://{u_name}:{u_pass}@clustertest-x6pax.mongodb.net/test"
+        mongo_url = f"mongodb+srv://{u_name}:{u_pass}@{mongodb_host}"
         client = MongoClient(mongo_url)
         db = client[db_name]
         self.collection = db[collection]

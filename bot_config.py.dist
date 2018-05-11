@@ -2,6 +2,7 @@ from collections import namedtuple
 from telegram import InlineKeyboardButton
 
 site_url = ""
+mongodb_host = "mongo hos" # mongodb host like clustertest-xxxx.mongodb.net/xxxx
 bd_credentials = ("mongodb_login", "mongodb_pass")
 bd_name = "data base name"
 bd_collection_name = "collection name"
