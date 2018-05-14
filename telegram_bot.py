@@ -9,7 +9,7 @@ import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 from mdb import MDB
-import bot_config, itc_parser
+import bot_config, site_parser
 
 
 class ITCBot(object):
@@ -177,7 +177,7 @@ class ITCBot(object):
             r = requests.get(url)
             r.encoding = 'utf-8'
             html_text = r.text
-            all_articles_from_page = itc_parser.get_all_articles_from_page(html_text)
+            all_articles_from_page = site_parser.get_all_articles_from_page(html_text)
             for article in all_articles_from_page:
                 time_start = article.get("date")
                 if time_start > time_end:
