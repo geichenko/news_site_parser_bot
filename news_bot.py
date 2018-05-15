@@ -12,7 +12,7 @@ from mdb import MDB
 import bot_config, site_parser
 
 
-class ITCBot(object):
+class NewsBot(object):
     def __init__(self):
         self.__message_id = [int(), str()]
         self.__db = MDB(*bot_config.bd_credentials, bot_config.bd_name, bot_config.bd_collection_name)
@@ -27,7 +27,7 @@ class ITCBot(object):
         if int(time.time()) > self.__time_start + 600:
             self.update_db()
             self.__time_start = int(time.time())
-        update.message.reply_text("Hi, this is itc bot, \nChose your option:", reply_markup=self.make_start_view())
+        update.message.reply_text("Hi, this is news bot, \nChose your option:", reply_markup=self.make_start_view())
 
     def callback_actions(self, bot, update):
         query = update.callback_query
@@ -159,8 +159,6 @@ class ITCBot(object):
         if extra_buttons:
             for button in extra_buttons:
                 footer_btns.append(button)
-        # if len(footer_btns) > 2:
-        #     footer_btns = self.make_columns(footer_btns, 2)
         return footer_btns
 
     @staticmethod
@@ -184,7 +182,7 @@ class ITCBot(object):
                     print(article.get("head"))
                     self.__db.write(article)
 
-    def main(self):
+    def run(self):
         updater = Updater(self.__bot_token)
         updater.dispatcher.add_handler(CommandHandler('start', self.start))
         updater.dispatcher.add_handler(CallbackQueryHandler(self.callback_actions))
@@ -193,5 +191,5 @@ class ITCBot(object):
         updater.idle()
 
 
-itc_bot = ITCBot()
-itc_bot.main()
+news_bot = NewsBot()
+news_bot.run()

@@ -4,3 +4,5 @@
  - MongoDB for storing parsed content
  - Heroku
  - lxml for parsing html
+ 
+#### All environment's vars are stored in the Heroku config
