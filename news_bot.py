@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import re
-import time
-import random
+import re, time, random, requests
 from datetime import datetime
-
-import requests
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from bson.objectid import ObjectId
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
+
 from mdb import MDB
 import bot_config, site_parser
 
@@ -54,6 +52,9 @@ class NewsBot(object):
             self.show_custom_date_view(query)
         if "view more" in query.data:
             self.show_more_entries(query)
+        if "article_id" in query.data:
+            _id = query.data.split("_")[2]
+            self.show_article(query, _id)
         else:
             print("-empty-")
 
@@ -103,7 +104,6 @@ class NewsBot(object):
     def show_entries_by_tag(self, query):
         db_search_result = self.__db.get_entries_by_tag(query.data)
         all_tags = self.__make_buttons_for_view(db_search_result, self.__buttons.to_tags)
-        all_tags.append(self.make_back_footer())
         query.edit_message_text(f'Results by tag {query.data}:', reply_markup=InlineKeyboardMarkup(all_tags))
 
     def show_more_entries(self, query):
@@ -130,12 +130,24 @@ class NewsBot(object):
         else:
             pass
 
+    def show_article(self, query, article_id: str):
+        db_search_result = self.__db.collection.find_one({"_id":ObjectId(article_id)})
+        print(db_search_result)
+        if db_search_result:
+            entry = db_search_result
+            url, head, body = entry.get("url"), entry.get("head"), entry.get("body")
+            link_to_page = InlineKeyboardButton("go to full view", url=url)
+            buttons = [[link_to_page], self.make_back_footer(self.__buttons.to_tags)]
+            query.edit_message_text(text=f'<b>{head}</b>\n{body}',
+                                    parse_mode=ParseMode.HTML,
+                                    reply_markup=InlineKeyboardMarkup(buttons))
+
     def __make_buttons_for_view(self, db_search_result, *footer_btns):
         all_entries = []
         if db_search_result.count():
             for result in db_search_result:
                 print(result)
-                all_entries.append([InlineKeyboardButton(result.get("head"), url=result.get("url"))])
+                all_entries.append([InlineKeyboardButton(result.get("head"), callback_data=f"article_id_{result.get('_id')}")])
         else:
             all_entries.append([self.__buttons.no_result])
         if len(all_entries) > 10:

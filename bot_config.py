@@ -2,12 +2,12 @@ from collections import namedtuple
 from telegram import InlineKeyboardButton
 import os
 
-site_url = os.environ.get("NEWS_SITE_PATH")
-mongodb_host = os.environ.get("MONGO_HOST")
-bd_credentials = (os.environ.get("DB_LOGIN"), os.environ.get("DB_PASS"))
-bd_name = os.environ.get("DB_NAME")
-bd_collection_name = os.environ.get("DB_COLLECTION")
-bot_token = os.environ.get("TELEGRAM_TOKEN")
+# site_url = os.environ.get("NEWS_SITE_PATH")
+# mongodb_host = os.environ.get("MONGO_HOST")
+# bd_credentials = (os.environ.get("DB_LOGIN"), os.environ.get("DB_PASS"))
+# bd_name = os.environ.get("DB_NAME")
+# bd_collection_name = os.environ.get("DB_COLLECTION")
+# bot_token = os.environ.get("TELEGRAM_TOKEN")
 
 # site_url = ""
 # mongodb_host = "mongo hos" # mongodb host like clustertest-xxxx.mongodb.net/xxxx
@@ -15,6 +15,16 @@ bot_token = os.environ.get("TELEGRAM_TOKEN")
 # bd_name = "data base name"
 # bd_collection_name = "collection name"
 # bot_token = "telegram token"
+
+site_url = "http://itc.ua/"
+mongodb_host = "clustertest-x6pax.mongodb.net/test"
+bd_credentials = ("geich", "geich_test_rereirf")
+bd_name = "itc"
+bd_collection_name = "articles"
+TAGS = ['iphone', 'ios', 'macos', 'osx', 'android', 'blackberry', 'oneplus', 'samsung', 'lg', 'google', 'pixel',
+        'meizu', 'oppo', 'htc', 'xiaomi', 'huawei', 'honor', 'mac', 'macbook', 'windows', 'linux', 'ubuntu', 'dell',
+        'hp', 'asus', 'debian', 'red hat']
+bot_token = "585515459:AAEMzff5y6pl5XoNNbEG_Xp3cZcwXWj9qnU"
 
 TAGS = ['iphone', 'ios', 'macos', 'osx', 'android', 'blackberry', 'oneplus', 'samsung', 'lg', 'google', 'pixel',
         'meizu', 'oppo', 'htc', 'xiaomi', 'huawei', 'honor', 'mac', 'macbook', 'windows', 'linux', 'ubuntu', 'dell',

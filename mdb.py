@@ -43,3 +43,8 @@ class MDB(object):
         date_start = parser.parse(date).timestamp()
         date_end = parser.parse(date).timestamp() + 86400
         return self.get_entries({"tags": tag_name, "date": {"$gte": date_start, "$lt": date_end}})
+
+# import bot_config
+# from bson.objectid import ObjectId
+# db = MDB(*bot_config.bd_credentials, bot_config.bd_name, bot_config.bd_collection_name)
+# print(db.collection.find_one({"_id":ObjectId("5b0fd80e250f4f00046b16c0")}))
