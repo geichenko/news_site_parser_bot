@@ -2,12 +2,12 @@ from collections import namedtuple
 from telegram import InlineKeyboardButton
 import os
 
-# site_url = os.environ.get("NEWS_SITE_PATH")
-# mongodb_host = os.environ.get("MONGO_HOST")
-# bd_credentials = (os.environ.get("DB_LOGIN"), os.environ.get("DB_PASS"))
-# bd_name = os.environ.get("DB_NAME")
-# bd_collection_name = os.environ.get("DB_COLLECTION")
-# bot_token = os.environ.get("TELEGRAM_TOKEN")
+site_url = os.environ.get("NEWS_SITE_PATH")
+mongodb_host = os.environ.get("MONGO_HOST")
+bd_credentials = (os.environ.get("DB_LOGIN"), os.environ.get("DB_PASS"))
+bd_name = os.environ.get("DB_NAME")
+bd_collection_name = os.environ.get("DB_COLLECTION")
+bot_token = os.environ.get("TELEGRAM_TOKEN")
 
 # site_url = ""
 # mongodb_host = "mongo hos" # mongodb host like clustertest-xxxx.mongodb.net/xxxx
@@ -16,15 +16,6 @@ import os
 # bd_collection_name = "collection name"
 # bot_token = "telegram token"
 
-site_url = "http://itc.ua/"
-mongodb_host = "clustertest-x6pax.mongodb.net/test"
-bd_credentials = ("geich", "geich_test_rereirf")
-bd_name = "itc"
-bd_collection_name = "articles"
-TAGS = ['iphone', 'ios', 'macos', 'osx', 'android', 'blackberry', 'oneplus', 'samsung', 'lg', 'google', 'pixel',
-        'meizu', 'oppo', 'htc', 'xiaomi', 'huawei', 'honor', 'mac', 'macbook', 'windows', 'linux', 'ubuntu', 'dell',
-        'hp', 'asus', 'debian', 'red hat']
-bot_token = "585515459:AAEMzff5y6pl5XoNNbEG_Xp3cZcwXWj9qnU"
 
 TAGS = ['iphone', 'ios', 'macos', 'osx', 'android', 'blackberry', 'oneplus', 'samsung', 'lg', 'google', 'pixel',
         'meizu', 'oppo', 'htc', 'xiaomi', 'huawei', 'honor', 'mac', 'macbook', 'windows', 'linux', 'ubuntu', 'dell',
@@ -34,7 +25,7 @@ TAGS = ['iphone', 'ios', 'macos', 'osx', 'android', 'blackberry', 'oneplus', 'sa
 buttons_name = namedtuple("buttons_name",
                           ["to_start", "to_tags", "to_date", "to_today", "search_by_tags", "search_by_date",
                            "search_by_today", "no_result", "view_more", "show_today", "show_yesterday",
-                           "show_custom_date"])
+                           "show_custom_date", "back_to_previous", "back_home"])
 
 inline_buttons = buttons_name(
     InlineKeyboardButton("Go back to Main List", callback_data="go to start"),
@@ -49,4 +40,7 @@ inline_buttons = buttons_name(
     InlineKeyboardButton("View Today Topics", callback_data="go to today"),
     InlineKeyboardButton("View Yesterday Topics", callback_data="go to yesterday"),
     InlineKeyboardButton("View Topics For A Custom Date", callback_data="go to custom date"),
+    InlineKeyboardButton("Back to previous", callback_data="back"),
+    InlineKeyboardButton("Back to home", callback_data="back home"),
+
 )
